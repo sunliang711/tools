@@ -23,7 +23,7 @@ make(){
 
     ##get VERSION_ID
     vid=$(grep -oP '(?<=release )[\d]' "$releaseFile")
-    repoFile="https://raw.githubusercontent.com/sunliang711/init/master/tools/centosSources/CentOS${vid}-Base-163.repo"
+    repoFile="https://raw.githubusercontent.com/sunliang711/tools/master/linuxSources/centos/CentOS${vid}-Base-163.repo"
     #download repoFile
     curl -LO $repoFile
     repoFile=CentOS${vid}-Base-163.repo
