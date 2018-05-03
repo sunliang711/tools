@@ -1,0 +1,11 @@
+[Unit]
+Description= ikev2 service
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/ipsec start
+
+[Install]
+WantedBy=multi-user.target
