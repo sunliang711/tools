@@ -30,7 +30,7 @@ version=$(bash -c "$(curl -fsSL https://raw.githubusercontent.com/sunliang711/to
 
 if [ "$version" == "debian-8" ];then
     d8
-elif [ "$version" == "debian-9" ]
+elif [ "$version" == "debian-9" ];then
     d9
 else
     echo "Not support you OS."
