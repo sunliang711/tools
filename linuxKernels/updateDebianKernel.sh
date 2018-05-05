@@ -24,7 +24,7 @@ while getopts ":hp:" opt;do
             usage
             ;;
         p)
-            proxy=$1
+            proxy=$OPTARG
             echo "use proxy: $proxy"
             ;;
     esac
