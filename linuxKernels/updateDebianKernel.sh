@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# tested on debian 8,9 ubuntu 16
-# TODO test on ubuntu 14 18
-
+# tested on debian 8,9 ubuntu 14 16
+#https://github.com/iMeiji/shadowsocks_install/wiki/%E5%BC%80%E5%90%AFTCP-BBR%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95
 if [ "$EUID" -ne 0 ];then
     echo "Need root privilege!"
     exit 1
