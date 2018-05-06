@@ -49,6 +49,7 @@ EOF
 
 install(){
     version="$(bash -c $(curl -fsSL https://raw.githubusercontent.com/sunliang711/tools/master/version.sh))"
+    echo "version: $version"
     case "$version" in
         centos-6)
             c6
