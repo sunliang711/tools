@@ -15,7 +15,7 @@ c6(){
 
 c7(){
     root
-    yum update
+    yum update -y
     yum install docker -y
 }
 

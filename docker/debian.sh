@@ -28,11 +28,15 @@ d9(){
 
 version=$(bash -c "$(curl -fsSL https://raw.githubusercontent.com/sunliang711/tools/master/version.sh)")
 
-if [ "$version" == "debian-8" ];then
-    d8
-elif [ "$version" == "debian-9" ];then
-    d9
-else
-    echo "Not support you OS."
-    exit 1
-fi
+case $version in
+    debian-8*)
+        d8
+        ;;
+    debian-9*)
+        d9
+        ;;
+    *)
+        echo "Not support you OS."
+        exit 1
+        ;;
+esac
