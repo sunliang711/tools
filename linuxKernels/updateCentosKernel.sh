@@ -12,8 +12,8 @@ c6(){
     rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org || { echo "import GPG KEY error!"; exit 1; }
     rpm -Uvh http://www.elrepo.org/elrepo-release-6-8.el6.elrepo.noarch.rpm || { echo "install elrepo-release-6-8.el6.elrepo.noarch.rpm error!"; exit 1; }
     yum --enablerepo=elrepo-kernel install kernel-ml -y || { echo "install mainline kernel error!"; exit 1; }
-    #backup /etc/grub.conf
-    grub=/etc/grub.conf
+    #backup /boot/grub/grub.conf
+    grub=/boot/grub/grub.conf
     cp "$grub" "${grub}.bak"
     sed -i 's/^\(default=\)[0-9]\+/\10/' $grub
     read -p "reboot ? [y/n] " re
