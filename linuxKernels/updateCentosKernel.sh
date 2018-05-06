@@ -31,7 +31,7 @@ c7(){
     grub=/etc/default/grub
     cp "$grub" "${grub}.bak"
     sed -i 's/^\(GRUB_DEFAULT=\).\+/\10/' $grub
-    grub2-mkconfig -o /etc/grub2.conf
+    grub2-mkconfig -o /boot/grub2/grub.cfg
     read -p "reboot ? [y/n] " re
     if [ "$re" == 'y' ];then
         reboot
