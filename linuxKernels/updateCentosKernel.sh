@@ -48,13 +48,13 @@ EOF
 }
 
 install(){
-    version="$(bash -c $(curl -fsSL https://raw.githubusercontent.com/sunliang711/tools/master/version.sh))"
+    local version="$(bash -c $(curl -fsSL https://raw.githubusercontent.com/sunliang711/tools/master/version.sh))"
     echo "version: $version"
     case "$version" in
-        centos-6)
+        centos-6*)
             c6
             ;;
-        centos-7)
+        centos-7*)
             c7
             ;;
         *)
