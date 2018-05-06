@@ -39,13 +39,6 @@ c7(){
 
 
 }
-usage(){
-    cat<<EOF
-Usage: $(basename $0) install|uninstall
-
-EOF
-    exit 1
-}
 
 install(){
     local version=`bash -c "$(curl -fsSL https://raw.githubusercontent.com/sunliang711/tools/master/version.sh)"`
@@ -62,11 +55,4 @@ install(){
             exit 1
     esac
 }
-case $1 in
-    install)
-        install
-        ;;
-    -h|--help)
-        usage
-        ;;
-esac
+install
