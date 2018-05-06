@@ -62,12 +62,8 @@ install(){
         enableBBR
         checkBBR
     else
+        echo "[NOTE]: Install kernel now,after this,you must run this script more time."
         installKernel
-    fi
-
-    if checkKernel;then
-        enableBBR
-        checkBBR
     fi
 }
 
