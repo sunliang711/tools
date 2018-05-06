@@ -62,8 +62,12 @@ install(){
         enableBBR
         checkBBR
     else
-        echo "BBR need linux kernel >= 4.9"
-        exit 1
+        installKernel
+    fi
+
+    if checkKernel;then
+        enableBBR
+        checkBBR
     fi
 }
 
