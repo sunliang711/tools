@@ -25,13 +25,13 @@ installKernel(){
     echo "Detect os: $version"
     case "$version" in
         ubuntu*)
-            bash -c "$(curl -fsSL https://raw.githubusercontent.com/sunliang711/tools/linuxKernels/updateDebianKernel.sh)"
+            bash -c "$(curl -fsSL https://raw.githubusercontent.com/sunliang711/tools/master/linuxKernels/updateDebianKernel.sh)"
             ;;
         debian*)
-            bash -c "$(curl -fsSL https://raw.githubusercontent.com/sunliang711/tools/linuxKernels/updateDebianKernel.sh)"
+            bash -c "$(curl -fsSL https://raw.githubusercontent.com/sunliang711/tools/master/linuxKernels/updateDebianKernel.sh)"
             ;;
         centos*)
-            bash -c "$(curl -fsSL https://raw.githubusercontent.com/sunliang711/tools/linuxKernels/updateCentosKernel.sh)"
+            bash -c "$(curl -fsSL https://raw.githubusercontent.com/sunliang711/tools/master/linuxKernels/updateCentosKernel.sh)"
             ;;
         *)
             echo "Not support your OS."
