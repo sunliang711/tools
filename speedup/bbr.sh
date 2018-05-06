@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#tested on centos 6 7 debian 7 8 9
 root(){
     if [ "$EUID" -ne 0 ];then
         echo "Need root privilege!"
