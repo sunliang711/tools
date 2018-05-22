@@ -158,18 +158,38 @@ setIptables(){
     iptables -t nat -A PREROUTING -p tcp -m set --match-set $ipsetTab dst -j REDIRECT --to-port $redirectPort
     iptables -t nat -A OUTPUT -p tcp -m set --match-set $ipsetTab dst -j REDIRECT --to-port $redirectPort
 
-    #ip rule add fwmark 1 table 100
-    #ip route add local 0.0.0.0/0 dev lo table 100
-    #iptables -t mangle -A PREROUTING -p udp -j TPROXY --on-port $redirectPort --tproxy-mark 0x01/0x01
-    #iptables -t mangle -A OUTPUT -p udp -j TPROXY --on-port $redirectPort --tproxy-mark 0x01/0x01
+    ip rule add fwmark 1 table 100
+    ip route add local 0.0.0.0/0 dev lo table 100
+    iptables -t mangle -A PREROUTING -d 127.0.0.0/24 -j RETURN
+    iptables -t mangle -A PREROUTING -d 192.168.0.0/16 -j RETURN
+    iptables -t mangle -A PREROUTING -d 10.42.0.0/16 -j RETURN
+    iptables -t mangle -A PREROUTING -d 0.0.0.0/8 -j RETURN
+    iptables -t mangle -A PREROUTING -d 10.0.0.0/8 -j RETURN
+    iptables -t mangle -A PREROUTING -d 172.16.0.0/12 -j RETURN
+    iptables -t mangle -A PREROUTING -d 224.0.0.0/4 -j RETURN
+    iptables -t mangle -A PREROUTING -d 240.0.0.0/4 -j RETURN
+    iptables -t mangle -A PREROUTING -d 169.254.0.0/16 -j RETURN
+    iptables -t mangle -A PREROUTING -d 255.255.0.0/8 -j RETURN
+    iptables -t mangle -A PREROUTING -p udp -j TPROXY --on-port $redirectPort --tproxy-mark 0x01/0x01
+
 }
 unsetIptables(){
     echo "unsetIptables..."
     iptables -t nat -D PREROUTING -p tcp -m set --match-set $ipsetTab dst -j REDIRECT --to-port $redirectPort
     iptables -t nat -D OUTPUT -p tcp -m set --match-set $ipsetTab dst -j REDIRECT --to-port $redirectPort
 
-    #iptables -t mangle -D PREROUTING -p udp -j TPROXY --on-port $redirectPort --tproxy-mark 0x01/0x01
-    #iptables -t mangle -D OUTPUT -p udp -j TPROXY --on-port $redirectPort --tproxy-mark 0x01/0x01
+    iptables -t mangle -D PREROUTING -d 127.0.0.0/24 -j RETURN
+    iptables -t mangle -D PREROUTING -d 192.168.0.0/16 -j RETURN
+    iptables -t mangle -D PREROUTING -d 10.42.0.0/16 -j RETURN
+    iptables -t mangle -D PREROUTING -d 0.0.0.0/8 -j RETURN
+    iptables -t mangle -D PREROUTING -d 10.0.0.0/8 -j RETURN
+    iptables -t mangle -D PREROUTING -d 172.16.0.0/12 -j RETURN
+    iptables -t mangle -D PREROUTING -d 224.0.0.0/4 -j RETURN
+    iptables -t mangle -D PREROUTING -d 240.0.0.0/4 -j RETURN
+    iptables -t mangle -D PREROUTING -d 169.254.0.0/16 -j RETURN
+    iptables -t mangle -D PREROUTING -d 255.255.0.0/8 -j RETURN
+    iptables -t mangle -D PREROUTING -p udp -j TPROXY --on-port $redirectPort --tproxy-mark 0x01/0x01
+
 }
 
 setIpset(){
