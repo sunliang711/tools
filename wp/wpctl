@@ -1,0 +1,45 @@
+#!/bin/bash
+
+thisScript=$(cd $(dirname $BASH_SOURCE)&&pwd)
+cd $thisScript
+
+sed "s+ROOT+$thisScript+" compose-nginx-wordpress.yml >docker-compose.yml
+gen(){
+	docker-compose -f docker-compose.yml up -d
+	echo "replace /etc/nginx/conf.d/default with nginx-wordpress-volume/default.conf"
+	docker cp nginx-wordpress-volume/default.conf $(basename $thisScript)_nginx_1:/etc/nginx/conf.d/default.conf
+	stop
+	start
+}
+start(){
+	docker-compose -f docker-compose.yml start
+}
+stop(){
+	docker-compose -f docker-compose.yml stop
+}
+rm(){
+	docker-compose -f docker-compose.yml down
+}
+
+case $1 in
+	create)
+		gen
+		;;
+	rm)
+		rm
+		;;
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		;;
+	*)
+		echo "Usage: $(basename $0) create|start|stop|restart|rm"
+		exit 1
+		;;
+esac

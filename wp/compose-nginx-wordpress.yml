@@ -1,0 +1,23 @@
+wordpress:
+        image: wordpress:fpm
+        links:
+                - db:mysql
+nginx:
+        image: raulr/nginx-wordpress
+        links:
+                - wordpress
+        volumes_from:
+                - wordpress
+        ports:
+                - "443:443"
+        environment:
+                POST_MAX_SIZE: 128m
+        volumes:
+                #- "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
+                #- "/root/nginx-wordpress-volume/cert:/etc/nginx/cert"
+                - "ROOT/nginx-wordpress-volume/cert:/etc/nginx/cert"
+                  #- "/root/nginx-wordpress-volume/default.conf:/etc/nginx/conf.d/default.conf"
+db:
+        image: mariadb
+        environment:
+                MYSQL_ROOT_PASSWORD: sl585802
