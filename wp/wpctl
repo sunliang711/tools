@@ -3,7 +3,18 @@
 thisScript=$(cd $(dirname $BASH_SOURCE)&&pwd)
 cd $thisScript
 
-sed "s+ROOT+$thisScript+" compose-nginx-wordpress.yml >docker-compose.yml
+#generate docker-compose config file dynamiclly
+sed "s+ROOT+$thisScript+" docker-compose.tmpl.yml >docker-compose.yml
+
+#check cmd
+if ! command -v docker >/dev/null 2>&1;then
+    echo "Need docker."
+    exit 1
+fi
+if ! command -v docker-compose >/dev/null 2>&1;then
+    echo "Need docker-compose."
+    exit 1
+fi
 gen(){
 	docker-compose -f docker-compose.yml up -d
 	echo "replace /etc/nginx/conf.d/default with nginx-wordpress-volume/default.conf"
@@ -43,3 +54,7 @@ case $1 in
 		exit 1
 		;;
 esac
+
+if [ -e docker-compose.yml ];then
+    rm -f docker-compose.yml
+fi
