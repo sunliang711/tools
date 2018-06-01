@@ -16,11 +16,32 @@ if ! command -v docker-compose >/dev/null 2>&1;then
     exit 1
 fi
 gen(){
+	domainName=${1:?missing domain name}
+
+	##privatekey file path
+	#priv=$(ls nginx-wordpress-volume/cert/*.key|awk -F'/' '{print $NF}')
+	##publickey filepath
+	#pem=$(ls nginx-wordpress-volume/cert/*.pem|awk -F'/' '{print $NF}')
+	#echo "priv: $priv"
+	#echo "pem: $pem"
+
+	#check cert/domain name.key existence
+	if [ ! -e nginx-wordpress-volume/cert/${domainName}.key ];then
+		echo "missing file nginx-wordpress-volume/cert/${domainName}.key"
+		exit 1
+	fi
+	#check cert/domain name.pem existence
+	if [ ! -e nginx-wordpress-volume/cert/${domainName}.pem ];then
+		echo "missing file nginx-wordpress-volume/cert/${domainName}.pem"
+		exit 1
+	fi
+	sed -e "s+DOMAIN+${domainName}+g" nginx-wordpress-volume/default.conf >nginx-wordpress-volume/conf.d/default.conf
 	docker-compose -f docker-compose.yml up -d
-	echo "replace /etc/nginx/conf.d/default with nginx-wordpress-volume/default.conf"
-	docker cp nginx-wordpress-volume/default.conf $(basename $thisScript)_nginx_1:/etc/nginx/conf.d/default.conf
-	stop
-	start
+
+	#echo "replace /etc/nginx/conf.d/default with nginx-wordpress-volume/default.conf"
+	#docker cp nginx-wordpress-volume/default.conf $(basename $thisScript)_nginx_1:/etc/nginx/conf.d/default.conf
+	#stop
+	#start
 }
 start(){
 	docker-compose -f docker-compose.yml start
@@ -34,7 +55,7 @@ rm(){
 
 case $1 in
 	create)
-		gen
+		gen $2
 		;;
 	rm)
 		rm
@@ -51,10 +72,8 @@ case $1 in
 		;;
 	*)
 		echo "Usage: $(basename $0) create|start|stop|restart|rm"
+		echo "Note: create cmd need domain name to set ssl certificate"
 		exit 1
 		;;
 esac
 
-if [ -e docker-compose.yml ];then
-    rm -f docker-compose.yml
-fi

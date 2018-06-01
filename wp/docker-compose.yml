@@ -16,9 +16,9 @@ nginx:
         volumes:
                 #- "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
                 #- "/root/nginx-wordpress-volume/cert:/etc/nginx/cert"
-                - "ROOT/nginx-wordpress-volume/cert:/etc/nginx/cert"
-                - "ROOT/nginx-wordpress-volume/conf.d:/etc/nginx/conf.d"
+                - "/root/tools/wp/nginx-wordpress-volume/cert:/etc/nginx/cert"
+                - "/root/tools/wp/nginx-wordpress-volume/conf.d:/etc/nginx/conf.d"
 db:
         image: mariadb
         environment:
-                MYSQL_ROOT_PASSWORD: sl585802
+                MYSQL_/root/tools/wp_PASSWORD: sl585802
