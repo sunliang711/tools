@@ -4,7 +4,7 @@ thisScript=$(cd $(dirname $BASH_SOURCE)&&pwd)
 cd $thisScript
 
 #generate docker-compose config file dynamiclly
-sed "s+ROOT+$thisScript+" docker-compose.tmpl.yml >docker-compose.yml
+sed "s+ROOTT+$thisScript+" docker-compose.tmpl.yml >docker-compose.yml
 
 #check cmd
 if ! command -v docker >/dev/null 2>&1;then

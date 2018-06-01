@@ -16,8 +16,8 @@ nginx:
         volumes:
                 #- "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
                 #- "/root/nginx-wordpress-volume/cert:/etc/nginx/cert"
-                - "ROOT/nginx-wordpress-volume/cert:/etc/nginx/cert"
-                - "ROOT/nginx-wordpress-volume/conf.d:/etc/nginx/conf.d"
+                - "ROOTT/nginx-wordpress-volume/cert:/etc/nginx/cert"
+                - "ROOTT/nginx-wordpress-volume/conf.d:/etc/nginx/conf.d"
 db:
         image: mariadb
         environment:
